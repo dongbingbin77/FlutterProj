@@ -43,11 +43,18 @@ class _MyPageState extends State<MyPage>{
     super.initState();
 
     debugPrint('initState');
-    postNet_2();
+    //postNet_2();
+
+    readFlashSalse();
     _timerSubscription = eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
   }
 
   String _content;
+
+  readFlashSalse() async {
+    var result = await DefaultAssetBundle.of(context).loadString('jsons/flash_sales.json');
+    debugPrint(result);
+  }
 
   void postNet_2() async {
     var params = Map<String, String>();
