@@ -6,9 +6,11 @@
 // We create the State reducer by combining many smaller reducers into one!
 import 'package:my_flutter/models/app_state.dart';
 import 'package:my_flutter/reducers/addReducer.dart';
+import 'package:my_flutter/reducers/homePageBannerReducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
-    count:addReducer(state.count,action),
+    addReducer(state.count,action),
+    homePageBannerReducer(state.banner,action)
   );
 }

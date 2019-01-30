@@ -152,7 +152,7 @@ class _MyPageState extends State<MyPage>{
                         onTap: (){
                           print("Container clicked");
 
-                          StoreProvider.of<AppState>(context).dispatch(AddAction());
+                          StoreProvider.of<AppState>(context).dispatch(AddAction(35));
                         },
                         child: new Container(
                           width: 500.0,

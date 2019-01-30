@@ -3,17 +3,21 @@
 // in the LICENSE file.
 
 import 'package:meta/meta.dart';
+import 'package:my_flutter/models/HomePageBanner/BannerItem.dart';
+import 'package:my_flutter/models/HomePageBanner/HomePageBanner.dart';
+import 'package:my_flutter/models/HomePageBanner/HomePageBannerContainer.dart';
 
 
 @immutable
 class AppState {
   final int count;
 
-  AppState(
-      {this.count=0});
+  final HomePageBannerContainer banner;
 
 
-  factory AppState.init() => AppState(count: 20);
+  AppState(this.count, this.banner);
+
+  factory AppState.init() => AppState(20,new HomePageBannerContainer(new HomePageBanner("100","",new List<BannerItem>())));
 
 //  AppState copyWith({
 //    bool isLoading,
