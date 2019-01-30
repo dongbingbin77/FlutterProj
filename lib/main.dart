@@ -1,8 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter/models/app_state.dart';
 import 'package:my_flutter/mypage.dart';
 import 'dart:async';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:my_flutter/reducers/addReducer.dart';
+import 'package:redux/redux.dart';
+import 'package:my_flutter/reducers/app_state_reducer.dart';
 void main() => runApp(_widgetForRoute(window.defaultRouteName));
 
 Widget _widgetForRoute(String route) {
@@ -18,12 +23,21 @@ Widget _widgetForRoute(String route) {
 
 
 class MyApp extends StatelessWidget {
+
+  final store = Store<AppState>(
+    appReducer,
+    initialState: AppState.init(),
+    //middleware: createStoreTodosMiddleware(),
+  );
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return StoreProvider(
+        store: store,
+        child:MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -35,6 +49,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page1'),
+    ),
     );
   }
 }

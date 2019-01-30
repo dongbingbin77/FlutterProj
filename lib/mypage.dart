@@ -4,9 +4,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_flutter/actions/actions.dart';
+import 'package:my_flutter/models/HomePageBanner/HomePageBannerContainer.dart';
 import 'dart:convert';
+
+import 'package:my_flutter/models/app_state.dart';
+import 'package:redux/redux.dart';
 //
 //class MyPage extends StatelessWidget{
 //  MyPage({Key key,this.title}):super(key:key);
@@ -46,6 +52,7 @@ class _MyPageState extends State<MyPage>{
     //postNet_2();
 
     readFlashSalse();
+    readBanner();
     _timerSubscription = eventChannel.receiveBroadcastStream().listen(_onEvent, onError: _onError);
   }
 
@@ -55,6 +62,14 @@ class _MyPageState extends State<MyPage>{
     var result = await DefaultAssetBundle.of(context).loadString('jsons/flash_sales.json');
     debugPrint(result);
   }
+
+  readBanner() async{
+    var result = await DefaultAssetBundle.of(context).loadString('jsons/home_page_banner.json');
+    Map bannerMap = jsonDecode(result);
+    var bannerContainer = HomePageBannerContainer.fromJson(bannerMap);
+    debugPrint("dongbingbin "+bannerContainer.data.head.elementAt(0).bannerImage);
+  }
+
 
   void postNet_2() async {
     var params = Map<String, String>();
@@ -124,6 +139,31 @@ class _MyPageState extends State<MyPage>{
                       color: Colors.yellow,
                       height: 120.0,
                       margin: EdgeInsets.only(bottom: 20),
+                      child: StoreConnector<AppState, int>(
+                        converter: (Store<AppState> store) {
+                          return store.state.count;
+                        },
+                        builder: (BuildContext context, int count) {
+                          return Text("$count");
+                        },
+                      ),
+                    ),
+                    new GestureDetector(
+                        onTap: (){
+                          print("Container clicked");
+
+                          StoreProvider.of<AppState>(context).dispatch(AddAction());
+                        },
+                        child: new Container(
+                          width: 500.0,
+                          padding: new EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 40.0),
+                          color: Colors.green,
+                          child: new Column(
+                              children: [
+                                new Text("Ableitungen"),
+                              ]
+                          ),
+                        )
                     ),
                     Container(
                       // Another fixed-height child.
@@ -139,7 +179,7 @@ class _MyPageState extends State<MyPage>{
                     ),
                     Container(
                       // Another fixed-height child.
-                      color: Colors.green,
+                      color: Colors.red,
                       height: 120.0,
                       margin: EdgeInsets.only(bottom: 20),
                     ),
@@ -151,7 +191,7 @@ class _MyPageState extends State<MyPage>{
                     ),
                     Container(
                       // Another fixed-height child.
-                      color: Colors.green,
+                      color: Colors.red,
                       height: 120.0,
                       child: new Swiper(
                         itemBuilder: (BuildContext context, int index) {
