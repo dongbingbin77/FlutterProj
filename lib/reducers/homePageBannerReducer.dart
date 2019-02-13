@@ -8,5 +8,7 @@ final homePageBannerReducer = combineReducers<HomePageBannerContainer>([
 ]);
 
 HomePageBannerContainer getBanner(HomePageBannerContainer state, action) {
-  return action.state;
+  print("dongbingbin getBanner");
+  return action.banner;
 }
+

@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'BannerItem.g.dart';
 
-
+//生成json类的命令 flutter packages pub run build_runner build
 
 @JsonSerializable()
 class BannerItem {

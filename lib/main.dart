@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter/homepage.dart';
 import 'package:my_flutter/models/app_state.dart';
 import 'package:my_flutter/mypage.dart';
 import 'dart:async';
@@ -95,6 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
     platform.setMethodCallHandler(platformCallHandler);
   }
 
+  void _toHomePage(){
+    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+      return new HomePage(title:"Home Page");
+    }));
+
+  }
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -110,9 +118,12 @@ class _MyHomePageState extends State<MyHomePage> {
     //Navigator.pop(context);
   }
 
+
   String _batteryLevel = "Unknown battery level.";
   static const platform = const MethodChannel("samples.flutter.io/battery");
   //static const _channel = MethodChannel()
+
+
 
 
   Future<Null> _getBatteryLevel() async {
@@ -226,6 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       color: Colors.red,
                       child: Row(
+                        //mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Container(
                             width: 50,
@@ -298,6 +310,18 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
               child: Column(
                 children: <Widget>[
+
+                  Expanded(
+                    child: Container(
+                      color: Colors.red,
+                      child: new RaisedButton(
+                          color:Colors.red,
+                          onPressed:_toHomePage,
+                          child: new Text("to homepage")
+                      ),
+                    ),
+                  ),
+
                   Expanded(
                     child: Container(
                       color: Colors.green,

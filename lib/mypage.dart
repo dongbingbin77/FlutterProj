@@ -67,6 +67,8 @@ class _MyPageState extends State<MyPage>{
     var result = await DefaultAssetBundle.of(context).loadString('jsons/home_page_banner.json');
     Map bannerMap = jsonDecode(result);
     var bannerContainer = HomePageBannerContainer.fromJson(bannerMap);
+
+    StoreProvider.of<AppState>(context).dispatch(GetBannerAction(bannerContainer));
     debugPrint("dongbingbin "+bannerContainer.data.head.elementAt(0).bannerImage);
   }
 
@@ -157,7 +159,7 @@ class _MyPageState extends State<MyPage>{
                         child: new Container(
                           width: 500.0,
                           padding: new EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 40.0),
-                          color: Colors.green,
+                          color: Colors.black12,
                           child: new Column(
                               children: [
                                 new Text("Ableitungen"),
