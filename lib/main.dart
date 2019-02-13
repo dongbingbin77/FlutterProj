@@ -277,15 +277,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                   height:550,
                                   color: Colors.brown,
                                 ),
+
                                 new Positioned(
-                                  right: 0,
+                                  right: 15,
                                   top:0,
-                                  left:0,
+                                  left:15,
                                   bottom: 0,
                                   child: new Container(
-                                    width: 150,
-                                    height: 150,
-                                    color: Colors.black,
+                                    width: 15,
+                                    height: 15,
+                                    color: Colors.green,
+                                    child:new Text("jdiofjiso")
                                   ),
                                 ),
                               ],
@@ -312,16 +314,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
 
                   Expanded(
-                    child: Container(
-                      color: Colors.red,
-                      child: new RaisedButton(
-                          color:Colors.red,
-                          onPressed:_toHomePage,
-                          child: new Text("to homepage")
-                      ),
-                    ),
-                  ),
 
+                    child:Stack(
+                      children: <Widget>[
+                        new Positioned(
+                            child:new Container(
+                              color: Colors.green,
+                            ),
+                        ),
+                        new Align(
+                          child: new GestureDetector(
+                              onTap: _toHomePage,
+                              child:
+                              Container(
+                                color: Colors.red,
+                                child: new Text("_toHomePage"),
+
+                              )
+                          ),
+                        ),
+
+                      ],
+                    )
+                    ),
                   Expanded(
                     child: Container(
                       color: Colors.green,
