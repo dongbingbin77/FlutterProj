@@ -6,7 +6,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_flutter/actions/actions.dart';
+import 'package:my_flutter/home_widget/IconTitleWidget.dart';
 import 'package:my_flutter/models/HomePageBanner/HomePageBannerContainer.dart';
+import 'package:my_flutter/models/HomePageBanner/IconTitleModel.dart';
 import 'dart:convert';
 
 import 'package:my_flutter/models/app_state.dart';
@@ -48,6 +50,21 @@ class _HomePageState extends State<HomePage2>{
 
     StoreProvider.of<AppState>(context).dispatch(GetBannerAction(bannerContainer));
     debugPrint("dongbingbin "+bannerContainer.data.head.elementAt(0).bannerImage);
+  }
+
+  List<IconTitleModel> getIconTitleList(){
+    return List.of([
+      new IconTitleModel("images/ic_launcher.png", "酒店")
+    ,new IconTitleModel("images/ic_launcher.png", "酒店")
+    ,new IconTitleModel("images/ic_launcher.png", "酒店")
+    ,new IconTitleModel("images/ic_launcher.png", "酒店")
+    ,new IconTitleModel("images/ic_launcher.png", "酒店")
+    ,new IconTitleModel("images/ic_launcher.png", "酒店")
+    ,new IconTitleModel("images/ic_launcher.png", "酒店")
+      ,new IconTitleModel("images/ic_launcher.png", "酒店")
+      ,new IconTitleModel("images/ic_launcher.png", "酒店")
+      ,new IconTitleModel("images/ic_launcher.png", "酒店")
+    ]);
   }
 
   @override
@@ -108,6 +125,36 @@ class _HomePageState extends State<HomePage2>{
                             ],
                           ),
                           //color: Colors.yellow,
+                        ),
+                        Container(
+                          //color: Colors.grey,
+                          margin: EdgeInsets.only(top:15),
+                          width: double.infinity,
+
+                          //height:100,
+                          child: GridView.builder(
+                              scrollDirection:Axis.vertical,
+                            shrinkWrap:true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                //childAspectRatio: .5 //显示区域宽高相等
+                            )
+                            , itemBuilder: (context,index){
+                            IconTitleModel model = getIconTitleList().elementAt(index);
+                            IconTitleWidget w = IconTitleWidget(model.icon, model.name,(name1)=>
+                              //debugPrint(name1)
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context){
+                                    return AlertDialog(
+                                      content: Text(name1),
+                                    );
+                                  },
+                              )
+                            );
+                            return w;
+                          }
+                            ,itemCount: getIconTitleList().length,).build(context),
                         )
                       ],
                     ),
