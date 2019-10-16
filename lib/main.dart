@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_flutter/homepage.dart';
+import 'package:my_flutter/homepage2.dart';
 import 'package:my_flutter/models/app_state.dart';
 import 'package:my_flutter/mypage.dart';
 import 'dart:async';
@@ -99,6 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void _toHomePage(){
     Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
       return new HomePage(title:"Home Page");
+    }));
+
+  }
+
+  void _toHomePage2(){
+    Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+      return new HomePage2(title:"Home Page2");
     }));
 
   }
@@ -324,7 +332,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         new Align(
                           child: new GestureDetector(
-                              onTap: _toHomePage,
+                              onTap: _toHomePage2,
                               child:
                               Container(
                                 color: Colors.red,
@@ -332,15 +340,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
                               )
                           ),
-                        ),
-
+                        )
                       ],
                     )
                     ),
                   Expanded(
                     child: Container(
-                      color: Colors.green,
-                      child: Text(_batteryLevel),
+                      color: Colors.black,
+                      child:
+                      new Align(
+                        child: new GestureDetector(
+                            onTap: _toHomePage2,
+                            child: Container(
+                              //transform: Matrix4.translationValues(20, 20, 0.0),
+                              color: Colors.blue,
+                              child: new Text("_toHomePage2"),
+
+                            )
+                        ),
+                      ),
                     ),
                   ),
                   Expanded(

@@ -68,12 +68,13 @@ class _HomePageState extends State<HomePage>{
                         margin: EdgeInsets.only(bottom: 20),
                         child: StoreConnector<AppState, HomePageBannerContainer>(
                           converter: (Store<AppState> store) {
-                            debugPrint("Store Connector");
+                            debugPrint("Store Connector ");
                             return store.state.banner;
                           },
                           builder: (BuildContext context, HomePageBannerContainer banner) {
                             return new Swiper(
                               itemBuilder: (BuildContext context, int index) {
+                               // debugPrint("dongbingbin image:"+banner.data.head[index].bannerImage);
                                 return new Image.network(
                                   banner.data.head[index].bannerImage,
                                   fit: BoxFit.fill,
@@ -82,9 +83,9 @@ class _HomePageState extends State<HomePage>{
                               index: 110,
                               itemCount: banner.data.head.length,
                               viewportFraction: 1,
-                              loop: banner.data.head.length>0,
+                              //loop: banner.data.head.length>0,
                               scale: 1,
-                              autoplay: false,
+                              //autoplay: false,
                               control: new SwiperPagination(
                                   margin: new EdgeInsets.all(1.0),
                                 builder: new DotSwiperPaginationBuilder(
@@ -98,14 +99,19 @@ class _HomePageState extends State<HomePage>{
                         ),
                       ),
                       Container(
+                        color: Colors.white,
                         height: 180,
                         child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.all(8.0),
-                          itemExtent: 20.0,
-                          itemCount: 3,
+                          scrollDirection: Axis.vertical,
+                         // padding: EdgeInsets.all(8.0),
+                          itemExtent: 50.0,
+                          itemCount: 30,
                           itemBuilder: (BuildContext context, int index) {
-                            return Text('entry $index');
+                            return Container(
+                                height: 30,
+                                color: Colors.blue,
+                                child:Text('entry $index')
+                            );
                           },
                         ),
                       ),

@@ -4,12 +4,12 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:my_flutter/models/HomePageBanner/HomePageBanner.dart';
 
 
-part 'package:my_flutter/models/HomePageBanner/HomePageBannerContainer.g.dart';
+part 'HomePageBannerContainer.g.dart';
 
 
 
 
-@JsonSerializable()
+
 @JsonSerializable()
 class HomePageBannerContainer {
   HomePageBanner data;
